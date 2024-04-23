@@ -9,7 +9,7 @@ interface JobResultProps {
 
 export default async function JobResult({
   filterValues: { q, type, location, remote },
-}: JobResultProps) {
+}: Readonly<JobResultProps>) {
   const searchParams: string | undefined = q
     ?.split(" ")
     .filter((word) => word.length > 0)
@@ -24,14 +24,24 @@ export default async function JobResult({
             description: { search: searchParams },
             type: { search: searchParams },
             location: { search: searchParams },
+            locationType: { search: searchParams },
           },
         ],
       }
     : {};
+
+  const where: Prisma.JobWhereInput = {
+    AND: [
+      searchFilter,
+      type ? { type } : {},
+      location ? { location } : {},
+      remote ? { locationType: "Remote" } : {},
+      { approved: true },
+    ],
+  };
+
   const jobs = await prisma.job.findMany({
-    where: {
-      approved: true,
-    },
+    where: where,
     orderBy: { createdAt: "desc" },
   });
   return (
@@ -39,6 +49,7 @@ export default async function JobResult({
       {jobs.map((job) => (
         <JobListItem job={job} key={job.id} />
       ))}
+      {jobs.length === 0 && <p className="text-center m-auto">No Jobs Found. Try adjusting your search filter.</p>}
     </div>
   );
 }

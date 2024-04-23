@@ -1,1 +1,1 @@
-export const locationTypes = ["Remote", "On-Site", "Hybrid"];
+export const locationTypes = ["Remote", "On-site", "Hybrid"];
