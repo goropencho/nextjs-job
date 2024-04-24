@@ -10,7 +10,7 @@ CREATE TABLE "jobs" (
     "salary" INTEGER NOT NULL,
     "companyName" TEXT NOT NULL,
     "applicationEmail" TEXT,
-    "applicationurl" TEXT,
+    "applicationUrl" TEXT,
     "companyLogoUrl" TEXT,
     "approved" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
