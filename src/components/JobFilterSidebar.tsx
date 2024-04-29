@@ -2,7 +2,7 @@ import { locationTypes } from "@/lib/constants/location-types";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import Select from "./ui/select";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/common/prisma";
 import { Button } from "./ui/button";
 import {
   JobFilterInterface,

@@ -1,5 +1,4 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import AdminNavBar from "./AdminNavBar";
+// import AdminNavBar from "./AdminNavBar";
 
 export default function RootLayout({
   children,
@@ -7,9 +6,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <AdminNavBar />
+    <main>
+      {/* <AdminNavBar /> */}
       {children}
-    </ClerkProvider>
+    </main>
   );
 }

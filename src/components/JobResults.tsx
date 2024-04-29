@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/common/prisma";
 import JobListItem from "./JobListItem";
 import { JobFilterInterface } from "@/lib/validations/jobfilters.schema";
 import { Prisma } from "@prisma/client";
@@ -93,7 +93,7 @@ function Pagination({
   currentPage,
   totalPages,
   filterValues: { q, location, remote, type },
-}: PaginationProps) {
+}: Readonly<PaginationProps>) {
   function generatePageLink(page: number) {
     const searchParams = new URLSearchParams({
       ...(q && { q }),

@@ -1,9 +1,9 @@
-import { isAdmin } from "@/lib/utils";
-import { currentUser } from "@clerk/nextjs/server";
-import prisma from "@/lib/prisma";
+"use server";
+import prisma from "@/lib/common/prisma";
 import { revalidatePath } from "next/cache";
 import { del } from "@vercel/blob";
 import { redirect } from "next/navigation";
+import { validateRequest } from "@/lib/common/lucia";
 
 type FormState = { error?: string } | undefined;
 export async function approveSubmission(
@@ -12,9 +12,9 @@ export async function approveSubmission(
 ): Promise<FormState> {
   try {
     const jobId = formdata.get("jobId") as string;
-    const user = await currentUser();
+    const user = await validateRequest();
 
-    if (!user || !isAdmin(user)) {
+    if (!user) {
       throw new Error("Not Authorized");
     }
 
@@ -44,9 +44,9 @@ export async function deleteSubmission(
 ): Promise<FormState> {
   try {
     const jobId = formdata.get("jobId") as string;
-    const user = await currentUser();
+    const user = await validateRequest();
 
-    if (!user || !isAdmin(user)) {
+    if (!user) {
       throw new Error("Not Authorized");
     }
 

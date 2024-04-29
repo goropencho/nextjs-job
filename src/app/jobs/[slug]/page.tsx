@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/common/prisma";
 
 interface SlugProps {
   params: { slug: string };

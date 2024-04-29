@@ -1,9 +1,15 @@
 import JobListItem from "@/components/JobListItem";
 import H1 from "@/components/ui/h1";
-import prisma from "@/lib/prisma";
+import { validateRequest } from "@/lib/common/lucia";
+import prisma from "@/lib/common/prisma";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
+  const { user } = await validateRequest();
+  if (!user) {
+    redirect("/");
+  }
   const unapprovedJobs = await prisma.job.findMany({
     where: { approved: false },
   });
@@ -14,7 +20,11 @@ export default async function AdminPage() {
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold">Unapproved jobs:</h2>
         {unapprovedJobs.map((job) => (
-          <Link key={job.id} href={`/admin/jobs/${job.slug}`} className="block">
+          <Link
+            key={job.id}
+            href={`/admin/jobs/${encodeURIComponent(job.slug)}`}
+            className="block"
+          >
             <JobListItem job={job} />
           </Link>
         ))}

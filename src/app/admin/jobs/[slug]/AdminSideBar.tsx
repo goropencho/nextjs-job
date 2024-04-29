@@ -1,3 +1,4 @@
+"use client";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import { Job } from "@prisma/client";
 import { useFormState } from "react-dom";

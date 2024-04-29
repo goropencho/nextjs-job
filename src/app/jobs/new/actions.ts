@@ -4,7 +4,7 @@ import { toSlug } from "@/lib/utils";
 import { CreateJobSchema } from "@/lib/validations/jobfilters.schema";
 import { nanoid } from "nanoid";
 import path from "path";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/common/prisma";
 import { put } from "@vercel/blob";
 import { string } from "zod";
 import { redirect } from "next/navigation";
